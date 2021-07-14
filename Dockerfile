@@ -17,7 +17,7 @@ library_dirs = /opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64\n\
 include_dirs = /opt/intel/compilers_and_libraries_2020/linux/mkl/include\n\
 libraries = mkl_rt" > ~/.numpy-site.cfg
 
-ENV LD_LIBRARY_PATH /opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64
+ENV LD_LIBRARY_PATH /opt/intel/compilers_and_libraries_2020.4.304/linux/mkl/lib/intel64
 
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
   && python3.8 -m pip install --upgrade pip \
@@ -40,6 +40,6 @@ RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
   && python3.8 -m pip install --upgrade pip \
   && pip install /wheels/*.whl
 
-ENV LD_LIBRARY_PATH /opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64
+ENV LD_LIBRARY_PATH /opt/intel/compilers_and_libraries_2020.4.304/linux/mkl/lib/intel64
 
 CMD python
