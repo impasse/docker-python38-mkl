@@ -24,7 +24,9 @@ RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
   && pip install numpy scipy --no-binary :all: --force-reinstall -t .
 
 RUN mkdir /wheels \
-  && find ~/.cache/pip/ -name '*.whl' | xargs -n 1 -i mv {} /wheels
+  && find ~/.cache/pip/ -name '*.whl' | xargs -n 1 -i mv {} /wheels \
+  && find /opt -type d | grep ia32 | xargs -n 1 rm -rf \
+  && find /opt -name '*.a' | xargs -n 1 rm
 
 FROM python:3.8
 
