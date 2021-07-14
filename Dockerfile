@@ -24,15 +24,13 @@ RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
   && pip install numpy scipy --no-binary :all: --force-reinstall -t .
 
 RUN mkdir /wheels \
-  && find ~/.cache/pip/ -name '*.whl' | xargs -n 1 -i mv {} /wheels \
-  && rm /opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64/*.a
+  && find ~/.cache/pip/ -name '*.whl' | xargs -n 1 -i mv {} /wheels
 
 FROM python:3.8
 
 WORKDIR /srv
 
-COPY --from=mkl /opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64 /opt/intel/compilers_and_libraries_2020/linux/mkl/lib/intel64
-COPY --from=mkl /opt/intel/compilers_and_libraries_2020/linux/mkl/include /opt/intel/compilers_and_libraries_2020/linux/mkl/include
+COPY --from=mkl /opt/intel/compilers_and_libraries_2020.4.304 /opt/intel/compilers_and_libraries_2020.4.304
 COPY --from=mkl /root/.numpy-site.cfg /root/.numpy-site.cfg
 COPY --from=mkl /wheels /wheels
 
